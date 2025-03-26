@@ -115,8 +115,13 @@
         .inbox {
             flex: 1;
             background: #ffffff;
-            padding: 20px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
             border-radius: 10px;
+            height:500px;
+            overflow-x: hidden;
+            overflow-y: scroll;
         }
         .inbox-header {
             display: flex;
@@ -125,6 +130,18 @@
             padding-bottom: 10px;
             margin-bottom: 10px;
             font-size: 16px;
+        }
+        .inbox-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #5f6368;
+            padding: 14px 0;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
         .tabs {
             display: flex;
@@ -200,6 +217,20 @@
             </ul>
         </aside>
         <main class="inbox">
+            <div class="inbox-info">
+                <i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-left:10px;font-size:16px"></i>
+                <i class="fa-solid fa-arrows-rotate" style="color: gray;margin-left:30px;font-size:14px"></i>
+                <i class="fa-solid fa-ellipsis-vertical" style="color: gray;margin-left:30px;font-size:14px"></i>
+
+
+                      <div class="nav-buttons" style="margin-left:75%">
+                    <span>1-50 of 500</span>
+                    &nbsp;  &nbsp;
+                    <i class="fa-solid fa-chevron-left"></i>
+                    &nbsp;  &nbsp;  &nbsp;
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
             <header class="inbox-header">
                 <div class="tabs">
                     <span class="tab active"><i class="fa-solid fa-inbox"></i> Primary</span>
@@ -220,7 +251,7 @@
                 <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Charan Ravanam has a new post for you</span><span class="email-date">Mar 21</span></li>
                 <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>MongoDB</strong><span class="email-subject"> - Incorrect deserialization of negative int64 values</span><span class="email-date">Mar 19</span></li>
                 <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Proto IT Consultants has a new post out now</span><span class="email-date">Mar 7</span></li>
-                
+
             </ul>
         </main>
     </div>
