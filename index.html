@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Inbox Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: #f3f5f9;
+            border-radius: 0px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            margin-top: 15px;
+        }
+        .header img {
+            height: 40px;
+            margin-right: 15px;
+        }
+        .header-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .search-container {
+            flex: 1;
+            display: flex;
+        }
+        .search-bar {
+            width: 60%;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            padding-left: 40px;
+            border: 1px solid #dadce0;
+            border-radius: 24px;
+            outline: none;
+            font-size: 16px;
+            background: #f1f3f4;
+            background-color: #e9eef6;
+            margin-left: 120px;
+        }
+        .search-icon{
+            margin-left: 128px;
+            position: absolute;
+            fill: gray; 
+            margin-top: 12px;
+        }
+        .filter-icon{
+            margin-left: 828px;
+            position: absolute;
+            fill: gray;
+            margin-top: 12px;
+        }
+        .gmail-container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+        }
+        .sidebar {
+            width: 280px;
+            padding: 15px;
+        }
+        .compose-btn {
+            background: #c2e7ff;
+            color: black;
+            border: none;
+            padding-top: 22px;
+            padding-bottom: 22px;
+            width: 50%;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            padding-left: 20px;
+            padding-right: 20px;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,0),0 1px 3px 1px rgba(0,0,0,0);
+        }
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .menu li {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-radius: 20px;
+            
+        }
+        .menu .active {
+            font-weight: bold;
+            background-color: #d3e3fd;
+        }
+        .menu .active .count {
+           color: black;
+           margin-left: 160px;
+        }
+        .count {
+            color: gray;
+            font-size: 0.9em;
+        }
+        .inbox {
+            flex: 1;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .inbox-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #dadce0;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .tabs {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        .tab {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .tab.active {
+            font-weight: bold;
+            color: #1a73e8;
+        }
+        .emails {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+        .emails li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            border-bottom: 1px solid #dadce0;
+            font-size: 14px;
+        }
+        .star-icon {
+            color: #a4a4a2;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .email-subject {
+            flex: 1;
+            padding: 0 10px;
+            color: #5f6368;
+        }
+        .email-date {
+            white-space: nowrap;
+            margin-left: auto;
+            color: black;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        </style>
+</head>
+<body>
+    <header class="header">
+        <!-- <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail Logo"> -->
+        <!-- <span class="header-title">Gmail</span> -->
+        <i class="fa fa-bars" style="color: gray;margin-right:20px;margin-left:20px"></i>
+
+        <img class="gb_Od" src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png" srcset="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png 1x, https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_2x_r5.png 2x " alt="" aria-hidden="true" role="presentation" style="width:109px;height:40px">
+        <div class="search-container">
+            <svg focusable="false" class="search-icon" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M20.49,19l-5.73-5.73C15.53,12.2,16,10.91,16,9.5C16,5.91,13.09,3,9.5,3S3,5.91,3,9.5C3,13.09,5.91,16,9.5,16 c1.41,0,2.7-0.47,3.77-1.24L19,20.49L20.49,19z M5,9.5C5,7.01,7.01,5,9.5,5S14,7.01,14,9.5S11.99,14,9.5,14S5,11.99,5,9.5z"></path><path d="M0,0h24v24H0V0z" fill="none"></path></svg>
+            <input type="text" class="search-bar" placeholder="Search mail">
+            <svg xmlns="http://www.w3.org/2000/svg" class="filter-icon" width="24" height="24" viewBox="0 0 24 24"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"></path></svg>
+        </div>
+    </header>
+    <div class="gmail-container">
+        <aside class="sidebar">
+            <button class="compose-btn"><i class="fa-solid fa-pen"></i> Compose</button>
+            <ul class="menu">
+                <li class="active"><i class="fa-solid fa-inbox"></i>Inbox <span class="count">86</span></li>
+                <li><i class="fa-regular fa-star" style="color: gray;"></i>Starred</li>
+                <li><i class="fa-regular fa-clock" style="color: gray;"></i>Snoozed</li>
+                <li><i class="fa-solid fa-paper-plane" style="color: gray;"></i>Sent</li>
+                <li><i class="fa-regular fa-file" style="color: gray;"></i>Drafts </li>
+                <li><i class="fa-solid fa-chevron-down" style="color: gray;"></i>More</li>
+            </ul>
+        </aside>
+        <main class="inbox">
+            <header class="inbox-header">
+                <div class="tabs">
+                    <span class="tab active"><i class="fa-solid fa-inbox"></i> Primary</span>
+                    <span class="tab"><i class="fa-solid fa-tag"></i> Promotions <span class="count" style="background: green; color: white; padding: 2px 6px; border-radius: 12px;">20 new</span></span>
+                    <span class="tab"><i class="fa-solid fa-users"></i> Social <span class="count" style="background: blue; color: white; padding: 2px 6px; border-radius: 12px;">50 new</span></span>
+                </div>
+            </header>
+            <ul class="emails">
+                <li> <i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Charan Ravanam has a new post for you</span><span class="email-date">2:45 PM</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>MongoDB</strong><span class="email-subject"> - Incorrect deserialization of negative int64 values</span><span class="email-date">1:00 PM</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Proto IT Consultants has a new post out now</span><span class="email-date">Mar 7</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Charan Ravanam has a new post for you</span><span class="email-date">Mar 21</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>MongoDB</strong><span class="email-subject"> - Incorrect deserialization of negative int64 values</span><span class="email-date">Mar 19</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Proto IT Consultants has a new post out now</span><span class="email-date">Mar 7</span></li>
+                <li> <i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Charan Ravanam has a new post for you</span><span class="email-date">2:45 PM</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>MongoDB</strong><span class="email-subject"> - Incorrect deserialization of negative int64 values</span><span class="email-date">1:00 PM</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Proto IT Consultants has a new post out now</span><span class="email-date">Mar 7</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Charan Ravanam has a new post for you</span><span class="email-date">Mar 21</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>MongoDB</strong><span class="email-subject"> - Incorrect deserialization of negative int64 values</span><span class="email-date">Mar 19</span></li>
+                <li><i class="fa-regular fa-square checkbox-icon" style="color: gray;margin-right:10px"></i> <i class="fa-regular fa-star star-icon"></i> <strong>LinkedIn</strong><span class="email-subject"> - Proto IT Consultants has a new post out now</span><span class="email-date">Mar 7</span></li>
+                
+            </ul>
+        </main>
+    </div>
+</body>
+</html>
